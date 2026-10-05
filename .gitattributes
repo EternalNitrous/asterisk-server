@@ -1,0 +1,14 @@
+* text=auto
+*.swift text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.mm text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.usdz binary
+*.ttf binary
+*.png binary
+*.uf2 binary
+*.c text eol=lf
+*.cmake text eol=lf
+*.sh text eol=lf

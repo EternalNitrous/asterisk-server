@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		84D392A630731D2100B81425 /* Asterisk.icon in Resources */ = {isa = PBXBuildFile; fileRef = 84D392A530731D2100B81425 /* Asterisk.icon */; };
+		8A0D6F272C23A00100F20400 /* AsteriskServerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F242C23A00100F20400 /* AsteriskServerApp.swift */; };
+		8A0D6F282C23A00100F20400 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F252C23A00100F20400 /* ContentView.swift */; };
+		8A0D6F292C23C00100F20400 /* ChicaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F292C23C00200F20400 /* ChicaConfig.swift */; };
+		8A0D6F2C2C23C00100F20400 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F2C2C23C00200F20400 /* JetBrainsMono-Regular.ttf */; };
+		8A0D6F2D2C23C00100F20400 /* ProtonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F2D2C23C00200F20400 /* ProtonUI.swift */; };
+		8A0D6F2E2C23C00100F20400 /* HexapodSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F2E2C23C00200F20400 /* HexapodSceneView.swift */; };
+		8A0D6F402C23B00100F20400 /* Gait/apk_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F392C23B00100F20400 /* Gait/apk_model.cpp */; };
+		8A0D6F412C23B00100F20400 /* Gait/pulse_conversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F3B2C23B00100F20400 /* Gait/pulse_conversion.cpp */; };
+		8A0D6F412C23C00100F20400 /* Models/Frame.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F412C23C00200F20400 /* Models/Frame.usdz */; };
+		8A0D6F422C23B00100F20400 /* Gait/ChicaGaitEngineBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D6F3E2C23B00100F20400 /* Gait/ChicaGaitEngineBridge.mm */; };
+		8A0D6F422C23C00100F20400 /* Models/Coxa.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F422C23C00200F20400 /* Models/Coxa.usdz */; };
+		8A0D6F432C23C00100F20400 /* Models/Femur.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F432C23C00200F20400 /* Models/Femur.usdz */; };
+		8A0D6F442C23C00100F20400 /* Models/Tibia.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F442C23C00200F20400 /* Models/Tibia.usdz */; };
+		8A0D6F452C23C00100F20400 /* Models/CoxaServo.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F452C23C00200F20400 /* Models/CoxaServo.usdz */; };
+		8A0D6F462C23C00100F20400 /* Models/FemurServo.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F462C23C00200F20400 /* Models/FemurServo.usdz */; };
+		8A0D6F472C23C00100F20400 /* Models/TibiaServo.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D6F472C23C00200F20400 /* Models/TibiaServo.usdz */; };
+		9B0D6F012C23C00100F20400 /* licenses/JetBrainsMono-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B0D6F022C23C00100F20400 /* licenses/JetBrainsMono-OFL.txt */; };
+		9B0D6F032C23C00100F20400 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9B0D6F042C23C00100F20400 /* LICENSE */; };
+		9B0D6F052C23C00100F20400 /* THIRD_PARTY_NOTICES.md in Resources */ = {isa = PBXBuildFile; fileRef = 9B0D6F062C23C00100F20400 /* THIRD_PARTY_NOTICES.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		84D392A530731D2100B81425 /* Asterisk.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Asterisk.icon; sourceTree = "<group>"; };
+		8A0D6F212C23A00100F20400 /* AsteriskServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsteriskServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A0D6F242C23A00100F20400 /* AsteriskServerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteriskServerApp.swift; sourceTree = "<group>"; };
+		8A0D6F252C23A00100F20400 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A0D6F262C23A00100F20400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A0D6F292C23C00200F20400 /* ChicaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChicaConfig.swift; sourceTree = "<group>"; };
+		8A0D6F2C2C23C00200F20400 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
+		8A0D6F2D2C23C00200F20400 /* ProtonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtonUI.swift; sourceTree = "<group>"; };
+		8A0D6F2E2C23C00200F20400 /* HexapodSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexapodSceneView.swift; sourceTree = "<group>"; };
+		8A0D6F382C23B00100F20400 /* Gait */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gait; sourceTree = "<group>"; };
+		8A0D6F392C23B00100F20400 /* Gait/apk_model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Gait/apk_model.cpp; sourceTree = "<group>"; };
+		8A0D6F3A2C23B00100F20400 /* Gait/apk_model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gait/apk_model.h; sourceTree = "<group>"; };
+		8A0D6F3B2C23B00100F20400 /* Gait/pulse_conversion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Gait/pulse_conversion.cpp; sourceTree = "<group>"; };
+		8A0D6F3C2C23B00100F20400 /* Gait/pulse_conversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gait/pulse_conversion.h; sourceTree = "<group>"; };
+		8A0D6F3D2C23B00100F20400 /* Gait/ChicaGaitEngineBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gait/ChicaGaitEngineBridge.h; sourceTree = "<group>"; };
+		8A0D6F3E2C23B00100F20400 /* Gait/ChicaGaitEngineBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Gait/ChicaGaitEngineBridge.mm; sourceTree = "<group>"; };
+		8A0D6F3F2C23B00100F20400 /* AsteriskServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AsteriskServer-Bridging-Header.h"; sourceTree = "<group>"; };
+		8A0D6F412C23C00200F20400 /* Models/Frame.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/Frame.usdz; sourceTree = "<group>"; };
+		8A0D6F422C23C00200F20400 /* Models/Coxa.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/Coxa.usdz; sourceTree = "<group>"; };
+		8A0D6F432C23C00200F20400 /* Models/Femur.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/Femur.usdz; sourceTree = "<group>"; };
+		8A0D6F442C23C00200F20400 /* Models/Tibia.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/Tibia.usdz; sourceTree = "<group>"; };
+		8A0D6F452C23C00200F20400 /* Models/CoxaServo.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/CoxaServo.usdz; sourceTree = "<group>"; };
+		8A0D6F462C23C00200F20400 /* Models/FemurServo.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/FemurServo.usdz; sourceTree = "<group>"; };
+		8A0D6F472C23C00200F20400 /* Models/TibiaServo.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Models/TibiaServo.usdz; sourceTree = "<group>"; };
+		9B0D6F022C23C00100F20400 /* licenses/JetBrainsMono-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "licenses/JetBrainsMono-OFL.txt"; sourceTree = "<group>"; };
+		9B0D6F042C23C00100F20400 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9B0D6F062C23C00100F20400 /* THIRD_PARTY_NOTICES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = THIRD_PARTY_NOTICES.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8A0D6F1E2C23A00100F20400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8A0D6F182C23A00100F20400 = {
+			isa = PBXGroup;
+			children = (
+				9B0D6F022C23C00100F20400 /* licenses/JetBrainsMono-OFL.txt */,
+				9B0D6F042C23C00100F20400 /* LICENSE */,
+				9B0D6F062C23C00100F20400 /* THIRD_PARTY_NOTICES.md */,
+				8A0D6F232C23A00100F20400 /* AsteriskServer */,
+				8A0D6F222C23A00100F20400 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8A0D6F222C23A00100F20400 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A0D6F212C23A00100F20400 /* AsteriskServer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A0D6F232C23A00100F20400 /* AsteriskServer */ = {
+			isa = PBXGroup;
+			children = (
+				8A0D6F242C23A00100F20400 /* AsteriskServerApp.swift */,
+				8A0D6F252C23A00100F20400 /* ContentView.swift */,
+				8A0D6F292C23C00200F20400 /* ChicaConfig.swift */,
+				8A0D6F2D2C23C00200F20400 /* ProtonUI.swift */,
+				8A0D6F2E2C23C00200F20400 /* HexapodSceneView.swift */,
+				8A0D6F2C2C23C00200F20400 /* JetBrainsMono-Regular.ttf */,
+				8A0D6F472C23C00200F20400 /* Models/TibiaServo.usdz */,
+				8A0D6F462C23C00200F20400 /* Models/FemurServo.usdz */,
+				8A0D6F452C23C00200F20400 /* Models/CoxaServo.usdz */,
+				8A0D6F442C23C00200F20400 /* Models/Tibia.usdz */,
+				8A0D6F432C23C00200F20400 /* Models/Femur.usdz */,
+				8A0D6F422C23C00200F20400 /* Models/Coxa.usdz */,
+				8A0D6F412C23C00200F20400 /* Models/Frame.usdz */,
+				8A0D6F262C23A00100F20400 /* Info.plist */,
+				8A0D6F3F2C23B00100F20400 /* AsteriskServer-Bridging-Header.h */,
+				8A0D6F382C23B00100F20400 /* Gait */,
+				8A0D6F392C23B00100F20400 /* Gait/apk_model.cpp */,
+				84D392A530731D2100B81425 /* Asterisk.icon */,
+				8A0D6F3A2C23B00100F20400 /* Gait/apk_model.h */,
+				8A0D6F3B2C23B00100F20400 /* Gait/pulse_conversion.cpp */,
+				8A0D6F3C2C23B00100F20400 /* Gait/pulse_conversion.h */,
+				8A0D6F3D2C23B00100F20400 /* Gait/ChicaGaitEngineBridge.h */,
+				8A0D6F3E2C23B00100F20400 /* Gait/ChicaGaitEngineBridge.mm */,
+			);
+			path = AsteriskServer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8A0D6F202C23A00100F20400 /* AsteriskServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A0D6F322C23A00100F20400 /* Build configuration list for PBXNativeTarget "AsteriskServer" */;
+			buildPhases = (
+				8A0D6F1D2C23A00100F20400 /* Sources */,
+				8A0D6F1E2C23A00100F20400 /* Frameworks */,
+				8A0D6F1F2C23A00100F20400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AsteriskServer;
+			productName = AsteriskServer;
+			productReference = 8A0D6F212C23A00100F20400 /* AsteriskServer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8A0D6F192C23A00100F20400 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					8A0D6F202C23A00100F20400 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 8A0D6F1C2C23A00100F20400 /* Build configuration list for PBXProject "AsteriskServer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8A0D6F182C23A00100F20400;
+			productRefGroup = 8A0D6F222C23A00100F20400 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8A0D6F202C23A00100F20400 /* AsteriskServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8A0D6F1F2C23A00100F20400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B0D6F012C23C00100F20400 /* licenses/JetBrainsMono-OFL.txt in Resources */,
+				9B0D6F032C23C00100F20400 /* LICENSE in Resources */,
+				84D392A630731D2100B81425 /* Asterisk.icon in Resources */,
+				9B0D6F052C23C00100F20400 /* THIRD_PARTY_NOTICES.md in Resources */,
+				8A0D6F2C2C23C00100F20400 /* JetBrainsMono-Regular.ttf in Resources */,
+				8A0D6F472C23C00100F20400 /* Models/TibiaServo.usdz in Resources */,
+				8A0D6F462C23C00100F20400 /* Models/FemurServo.usdz in Resources */,
+				8A0D6F452C23C00100F20400 /* Models/CoxaServo.usdz in Resources */,
+				8A0D6F442C23C00100F20400 /* Models/Tibia.usdz in Resources */,
+				8A0D6F432C23C00100F20400 /* Models/Femur.usdz in Resources */,
+				8A0D6F422C23C00100F20400 /* Models/Coxa.usdz in Resources */,
+				8A0D6F412C23C00100F20400 /* Models/Frame.usdz in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8A0D6F1D2C23A00100F20400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A0D6F272C23A00100F20400 /* AsteriskServerApp.swift in Sources */,
+				8A0D6F282C23A00100F20400 /* ContentView.swift in Sources */,
+				8A0D6F292C23C00100F20400 /* ChicaConfig.swift in Sources */,
+				8A0D6F2D2C23C00100F20400 /* ProtonUI.swift in Sources */,
+				8A0D6F2E2C23C00100F20400 /* HexapodSceneView.swift in Sources */,
+				8A0D6F402C23B00100F20400 /* Gait/apk_model.cpp in Sources */,
+				8A0D6F412C23B00100F20400 /* Gait/pulse_conversion.cpp in Sources */,
+				8A0D6F422C23B00100F20400 /* Gait/ChicaGaitEngineBridge.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8A0D6F292C23A00100F20400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8A0D6F2A2C23A00100F20400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		8A0D6F302C23A00100F20400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Asterisk;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2379LTJ66P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AsteriskServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.n1trous.asterisk;
+				PRODUCT_NAME = AsteriskServer;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AsteriskServer/AsteriskServer-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8A0D6F312C23A00100F20400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Asterisk;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2379LTJ66P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AsteriskServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.n1trous.asterisk;
+				PRODUCT_NAME = AsteriskServer;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AsteriskServer/AsteriskServer-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A0D6F1C2C23A00100F20400 /* Build configuration list for PBXProject "AsteriskServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A0D6F292C23A00100F20400 /* Debug */,
+				8A0D6F2A2C23A00100F20400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A0D6F322C23A00100F20400 /* Build configuration list for PBXNativeTarget "AsteriskServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A0D6F302C23A00100F20400 /* Debug */,
+				8A0D6F312C23A00100F20400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8A0D6F192C23A00100F20400 /* Project object */;
+}

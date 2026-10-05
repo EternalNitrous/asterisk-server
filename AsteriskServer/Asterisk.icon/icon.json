@@ -1,0 +1,112 @@
+{
+  "fill-specializations" : [
+    {
+      "value" : {
+        "linear-gradient" : [
+          "display-p3:0.56842,0.56842,0.56842,1.00000",
+          "display-p3:0.31969,0.31969,0.31969,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance" : "dark",
+      "value" : {
+        "linear-gradient" : [
+          "display-p3:0.16547,0.16547,0.16547,1.00000",
+          "display-p3:0.06143,0.06143,0.06143,1.00000"
+        ]
+      }
+    }
+  ],
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "fill-specializations" : [
+            {
+              "value" : {
+                "linear-gradient" : [
+                  "display-p3:1.00000,1.00000,1.00000,1.00000",
+                  "display-p3:0.50046,0.50046,0.50046,1.00000"
+                ],
+                "orientation" : {
+                  "start" : {
+                    "x" : 0.3382363519924601,
+                    "y" : 0
+                  },
+                  "stop" : {
+                    "x" : 0.6374353727514889,
+                    "y" : 1.0616756337695354
+                  }
+                }
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "linear-gradient" : [
+                  "display-p3:0.54865,0.54865,0.54865,1.00000",
+                  "display-p3:0.20446,0.20446,0.20446,1.00000"
+                ],
+                "orientation" : {
+                  "start" : {
+                    "x" : 0.3382363519924601,
+                    "y" : 0
+                  },
+                  "stop" : {
+                    "x" : 0.6374353727514889,
+                    "y" : 1.0616756337695354
+                  }
+                }
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "linear-gradient" : [
+                  "display-p3:0.98619,0.98619,0.98619,1.00000",
+                  "display-p3:0.07626,0.07626,0.07626,1.00000"
+                ],
+                "orientation" : {
+                  "start" : {
+                    "x" : 0.3382363519924601,
+                    "y" : 0
+                  },
+                  "stop" : {
+                    "x" : 0.6374353727514889,
+                    "y" : 1.0616756337695354
+                  }
+                }
+              }
+            }
+          ],
+          "glass" : false,
+          "image-name" : "Untitled_Artwork 2.png",
+          "name" : "Untitled_Artwork 2",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

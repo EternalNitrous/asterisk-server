@@ -1,0 +1,32 @@
+# Xcode user state and build outputs
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.xcarchive
+*.ipa
+*.dSYM/
+*.dSYM.zip
+
+# Local signing and credentials
+*.mobileprovision
+*.p12
+*.p8
+*.cer
+*.key
+.env
+.env.*
+Local.xcconfig
+
+# Local tools and capture output
+.venv/
+__pycache__/
+*.pyc
+oracle/
+research-private/
+.claude/
+.codex/
+.DS_Store
+
+# Downloaded firmware dependencies (source and release UF2 are tracked)
+firmware/deps/

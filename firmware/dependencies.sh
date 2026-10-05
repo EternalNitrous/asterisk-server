@@ -1,0 +1,6 @@
+# Exact dependency revisions used for the bundled UF2.
+TINYUSB_REV=11b4cf61efb2d59ebf358c4afdd2dfd4c614276e
+PICO_SDK_REV=a1438dff1d38bd9c65dbd693f0e5db4b9ae91779
+LWIP_REV=159e31b689577dbf69cf0683bbaffbd71fa5ee10
+PICOTOOL_REV=a7eb3988f0645239185fadb4e25d8279478c2dbb
+LINKERMAP_REV=8e1f440fa15c567aceb5aa0d14f6d18c329cc67f
