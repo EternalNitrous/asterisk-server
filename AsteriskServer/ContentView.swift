@@ -821,10 +821,8 @@ final class AsteriskServerModel {
         await MainActor.run { "ready:" + (self?.originalStatusString() ?? ChicaConst.idleStatus) }
       }
       controlServer.process = { [weak self] line, session in
-        await MainActor.run {
-          self?.noteClient("tcp")
-          return self?.processProtocolLine(line, session: session)
-        }
+        self?.noteClient("tcp")
+        return await self?.processProtocolLine(line, session: session)
       }
       server = controlServer
       try controlServer.start()
@@ -857,10 +855,8 @@ final class AsteriskServerModel {
         await MainActor.run { "ready:" + (self?.originalStatusString() ?? ChicaConst.idleStatus) }
       }
       socketServer.process = { [weak self] line, session in
-        await MainActor.run {
-          self?.noteClient("ws")
-          return self?.processProtocolLine(line, session: session)
-        }
+        self?.noteClient("ws")
+        return await self?.processProtocolLine(line, session: session)
       }
       wsServer = socketServer
       try socketServer.start()
@@ -973,10 +969,10 @@ final class AsteriskServerModel {
 
   // Returns the reply line (without trailing newline), or nil to close the
   // connection (client sent bye / disconnected).
-  func processProtocolLine(_ line: String, session: ChicaClientSession) -> String? {
+  func processProtocolLine(_ line: String, session: ChicaClientSession) async -> String? {
     let command = line.trimmingCharacters(in: .whitespacesAndNewlines)
     if command == "bye" {
-      requestOriginalWalkStop(logTargetNull: false)
+      releaseMovementTargets()
       return nil
     }
     if command.isEmpty {
@@ -985,11 +981,16 @@ final class AsteriskServerModel {
     record("tcp_recv \(command)")
     if command != "ack" { session.ackCount = 0 }
     if isBusy() {
+      // The APK delays busy replies and handled ACK replies by 100 ms. Without
+      // this pacing, a polling client can exhaust the 60-ACK auto-sit counter
+      // almost immediately and repeatedly home feet during the walk-stop drain.
+      await sleepPoseStep(100)
       return "busy:" + originalStatusString()
     }
     if command == "ack" && shouldHandleOriginalAck() {
       session.ackCount += 1
       handleOriginalAck(session.ackCount)
+      await sleepPoseStep(100)
       return "ready:" + originalStatusString()
     }
     submitOriginalCommand(command)
@@ -1077,17 +1078,9 @@ final class AsteriskServerModel {
     } else if command.hasPrefix("walk") {
       await applyWalkCommand(command)
     } else if command.hasPrefix("clear") {
-      activeWalk = false
-      pendingWalkClear = false
-      pendingStopStep = false
-      lastWalk = WalkCommandState()
-      filteredWalk = WalkCommandState()
-      walkStepCount = 0
-      walkModeIndex = -1
-      resetSetControls()
-      if relayEnabled && !originalMotionBusy() {
-        _ = await setOriginalStanding(false, powerOffAfterSit: true)
-      }
+      // The client sends clear on joystick release. d.n0 only nulls the
+      // shared walk/set targets; it neither sits nor changes gait/torque.
+      releaseMovementTargets()
     } else if command.hasPrefix("setclear") {
       resetSetControls()
     } else if command.hasPrefix("set") {
@@ -1227,6 +1220,9 @@ final class AsteriskServerModel {
         for leg in quadrupedActiveLegs {
           await runPoseRamp(legs: [leg], threshold: threshold, lift: lift, layerBlend: layerBlend, durationMs: duration)
         }
+        // z0.o.g() finishes the standing quad sequence with p3.a.p(),
+        // returning the support lean and animation layers to neutral.
+        await publishOriginalLayerFade()
       } else {
         await runPoseRamp(legs: quadrupedActiveLegs, threshold: threshold, lift: lift, layerBlend: layerBlend, durationMs: duration)
       }
@@ -1243,6 +1239,14 @@ final class AsteriskServerModel {
   private func runPoseRamp(legs: [Int], threshold: Double, lift: Double, layerBlend: Double, durationMs: Double) async {
     let legNums = legs.map { NSNumber(value: $0) }
     if !gaitEngine.beginPoseRampToNeutral(legs: legNums, threshold: threshold, lift: lift, layerBlend: layerBlend, durationMs: durationMs) { return }
+    if legs.count == 1 && activeOutputLegs.count == 4,
+       gaitEngine.beginCogLeanRamp(leg: legs[0], durationMs: durationMs) {
+      // p3.a.M shifts weight before lifting a selected quadruped foot. The
+      // initial threshold check has already selected it; build the swing from
+      // the pose after that lean without selecting the foot a second time.
+      await runTimedAnimation(durationMs: durationMs)
+      if !gaitEngine.beginPoseRampToNeutral(legs: legNums, threshold: -1, lift: lift, layerBlend: layerBlend, durationMs: durationMs) { return }
+    }
     await runTimedAnimation(durationMs: durationMs)
   }
 
@@ -1555,6 +1559,13 @@ final class AsteriskServerModel {
       if !Task.isCancelled && !preserveKeptQuadrupedPose {
         await publishOriginalLayerFade()
       }
+      if !Task.isCancelled {
+        // clear keeps the logical walking flag until the worker has drained
+        // its last target/anchors and finished p(), as in z0.e.
+        activeWalk = false
+        pendingWalkClear = false
+        pendingStopStep = false
+      }
       walkTask = nil
     }
   }
@@ -1576,7 +1587,9 @@ final class AsteriskServerModel {
     let rawDtMs = min(Double(now >= lastStepMillis ? now - lastStepMillis : 0), ChicaConst.maxStepDtMs)
     var dtMs = rawDtMs * currentMode().speed
     let transitioningToStop = pendingWalkClear
-    let walking = activeWalk || transitioningToStop
+    // Logical walking may remain true after clear. The worker's target has
+    // nevertheless been released, so it must decay rather than start anchors.
+    let walking = (activeWalk && !pendingStopStep) || transitioningToStop
     let stopping = pendingStopStep
     // walkclear releases the busy flag immediately. Its old gait task still
     // drains its target/anchors if a sit or torque command changes posture.
@@ -1609,12 +1622,16 @@ final class AsteriskServerModel {
     return true
   }
 
-  private func requestOriginalWalkStop(logTargetNull: Bool) {
+  private func releaseMovementTargets() {
+    resetSetControls(clearMotionFlag: false)
+    requestOriginalWalkStop(logTargetNull: false, clearMotionFlag: false)
+  }
+
+  private func requestOriginalWalkStop(logTargetNull: Bool, clearMotionFlag: Bool = true) {
     if logTargetNull { record("walkclear_target_null") }
-    if standing && relayEnabled && walkTask != nil {
-      pendingStopStep = false
-      pendingWalkClear = true
-      activeWalk = false
+    if walkTask != nil {
+      if !pendingStopStep { pendingWalkClear = true }
+      if clearMotionFlag { activeWalk = false }
       lastWalk = WalkCommandState()
       return
     }
@@ -1702,13 +1719,13 @@ final class AsteriskServerModel {
     }
   }
 
-  private func resetSetControls() {
+  private func resetSetControls(clearMotionFlag: Bool = true) {
     setPoseTargetActive = false
     lastPrimaryX = 0; lastPrimaryY = 0; lastSecondaryX = 0; lastSecondaryY = 0
     lastTertiaryX = 0; lastTertiaryY = 0
-    // Clearing the logical flag permits a new worker while the old one drains
-    // its private target and velocity. It does not change the old routine.
-    setWorkerRunning = false
+    // setclear clears b(false) immediately; clear/bye only release the target
+    // and leave the flag set until the private worker finishes its release.
+    if clearMotionFlag { setWorkerRunning = false }
   }
 
   private func approachSharedSetTarget(_ target: inout [Double]) {
@@ -2322,22 +2339,25 @@ final class ChicaControlServer {
       var nextBuffer = buffer
       if let data, !data.isEmpty {
         nextBuffer += String(data: data, encoding: .utf8) ?? ""
-        let parts = nextBuffer.components(separatedBy: "\n")
-        nextBuffer = parts.last ?? ""
-        for line in parts.dropLast() {
-          Task {
-            guard let reply = await self.process?(line, session) else {
-              connection.cancel()
-              return
-            }
-            self.send(reply + "\n", on: connection)
-          }
-        }
       }
-      if isComplete {
-        connection.cancel()
-      } else {
-        self.receiveLoop(connection: connection, buffer: nextBuffer, session: session)
+      let parts = nextBuffer.components(separatedBy: "\n")
+      let remainder = parts.last ?? ""
+      // One processor per connection, matching the APK's blocking read loop.
+      // Receive the next batch only after these replies have been sent; separate
+      // tasks for each line would overlap the 100-ms sleeps and ACK counters.
+      Task {
+        for line in parts.dropLast() {
+          guard let reply = await self.process?(line, session) else {
+            connection.cancel()
+            return
+          }
+          self.send(reply + "\n", on: connection)
+        }
+        if isComplete {
+          connection.cancel()
+        } else {
+          self.receiveLoop(connection: connection, buffer: remainder, session: session)
+        }
       }
     }
   }
@@ -2455,12 +2475,13 @@ final class ChicaWebSocketServer {
         connection.cancel()
         return
       }
-      if let data, !data.isEmpty, let text = String(data: data, encoding: .utf8) {
-        // One frame is normally one command, but tolerate newline-batched frames.
-        let lines = text.contains("\n") ? text.components(separatedBy: "\n") : [text]
-        for raw in lines {
-          if raw.isEmpty && lines.count > 1 { continue }
-          Task {
+      Task {
+        if let data, !data.isEmpty, let text = String(data: data, encoding: .utf8) {
+          // Keep frames and newline-batched commands in receive order, with the
+          // same ACK/busy reply pacing as TCP.
+          let lines = text.contains("\n") ? text.components(separatedBy: "\n") : [text]
+          for raw in lines {
+            if raw.isEmpty && lines.count > 1 { continue }
             guard let reply = await self.process?(raw, session) else {
               connection.cancel()
               return
@@ -2468,8 +2489,8 @@ final class ChicaWebSocketServer {
             self.sendText(reply, on: connection)
           }
         }
+        self.receiveLoop(connection: connection, session: session)
       }
-      self.receiveLoop(connection: connection, session: session)
     }
   }
 
