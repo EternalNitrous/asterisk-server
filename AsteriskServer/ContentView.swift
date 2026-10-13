@@ -1584,26 +1584,46 @@ final class AsteriskServerModel {
 
   private func stepOriginalGait() async -> Bool {
     let now = monotonicMilliseconds()
-    let rawDtMs = min(Double(now >= lastStepMillis ? now - lastStepMillis : 0), ChicaConst.maxStepDtMs)
-    var dtMs = rawDtMs * currentMode().speed
+    let rawDtMs = Double(now >= lastStepMillis ? now - lastStepMillis : 0)
+    // walkclear releases the busy flag immediately. Its old gait task still
+    // drains its target/anchors if a sit or torque command changes posture.
+    guard (activeWalk && !pendingStopStep) || pendingWalkClear || pendingStopStep else { return false }
+    lastStepMillis = now
+
+    // The original runs this loop on its own thread at a steady ~10 ms, and the
+    // stop machine below counts iterations (0.9 decay, 0.05 target blend). A
+    // MainActor task wakes late under load, so a late wake-up is replayed as
+    // the iterations the original would have run (each ~10 ms) instead of one
+    // long or clamped step. Only the final frame is published.
+    let speed = currentMode().speed
+    var iterations = 1
+    if walkStepCount > 0 {
+      iterations = min(ChicaConst.maxCatchUpIterations,
+                       max(1, Int((rawDtMs / ChicaConst.gaitIterationMs).rounded())))
+    }
+    let iterationDtMs = rawDtMs / Double(iterations) * speed
+    var shouldContinue = true
+    for _ in 0..<iterations {
+      shouldContinue = runGaitIteration(dtMs: originalFrameDt(stepCount: walkStepCount, measuredDtMs: iterationDtMs))
+      if !shouldContinue { break }
+    }
+    await publishPulses(lastPulses)
+    return shouldContinue
+  }
+
+  /// One iteration of z0.e's walk loop: a gait step followed by its target
+  /// blend / stop decay. Returns false once the stop has drained.
+  private func runGaitIteration(dtMs: Double) -> Bool {
     let transitioningToStop = pendingWalkClear
     // Logical walking may remain true after clear. The worker's target has
     // nevertheless been released, so it must decay rather than start anchors.
     let walking = (activeWalk && !pendingStopStep) || transitioningToStop
-    let stopping = pendingStopStep
-    // walkclear releases the busy flag immediately. Its old gait task still
-    // drains its target/anchors if a sit or torque command changes posture.
-    guard walking || stopping else { return false }
-
-    dtMs = originalFrameDt(stepCount: walkStepCount, measuredDtMs: dtMs)
-    lastStepMillis = now
     let allowGait = walking || walkMagnitude(filteredWalk) > originalStopVectorThreshold
     lastPulses = mergeActiveLegPulses(pulses(from: gaitEngine.step(
       withGait: gaitForMode(), animation: animation,
       forward: filteredWalk.forward, strafe: filteredWalk.strafe, turn: filteredWalk.turn,
       deltaMs: dtMs, allowNewAnchors: allowGait)))
     walkStepCount += 1
-    await publishPulses(lastPulses)
 
     if transitioningToStop {
       pendingWalkClear = false
@@ -2208,14 +2228,14 @@ enum ChicaPorts {
 }
 
 enum ChicaConst {
-  // Cap on a single gait/pose step's measured dt. The original runs its motion
-  // workers on dedicated threads with a precise ~10ms sleep, so dt never exceeds
-  // ~10-12ms. On iOS the workers are MainActor Tasks that can be scheduled late
-  // under contention; without a cap a stalled frame feeds a huge dt into the
-  // engine and the gait lurches/snaps (most visible resuming a walk right after a
-  // stop). Clamping keeps per-frame advance bounded and matches the original in
-  // the normal (unstalled) case.
-  static let maxStepDtMs = 16.0
+  // The original runs its walk loop on a dedicated thread with a precise ~10 ms
+  // sleep, so each iteration sees dt of ~10-12 ms. The iOS worker is a MainActor
+  // Task that wakes late under contention. A late wake-up is replayed as
+  // round(elapsed / gaitIterationMs) iterations of that loop (capped, so a long
+  // stall such as a suspended app is dropped rather than replayed), keeping gait
+  // time and the iteration-counted stop decay equal to the original's.
+  static let gaitIterationMs = 10.5
+  static let maxCatchUpIterations = 20
   static let allLegs = [0, 3, 1, 4, 2, 5]
   static let originalActiveOrder = [5, 2, 1, 0, 3, 4]
   static let standLeftTripod = [0, 4, 2]
